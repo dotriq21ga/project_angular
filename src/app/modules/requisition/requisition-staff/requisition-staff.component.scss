@@ -1,0 +1,70 @@
+section {
+    margin-left: 250px;
+    padding: 16px 8px;
+}
+
+.filter-row {
+    padding: 20px 0;
+}
+
+label {
+    top: -40px;
+    position: absolute;
+}
+
+.box-card,
+.item {
+    padding: 0 0.5%;
+    position: relative;
+}
+
+.box-card td,
+.box-card th {
+    text-align: center;
+}
+
+.box-card td span {
+    padding: 0 5px;
+}
+
+.p-menu.p-menu-overlay {
+    position: none;
+}
+
+.item button {
+    background-color: transparent;
+    border: none;
+    padding: 0 5px;
+}
+
+.btn-or {
+    color: #00Bfff;
+}
+
+.btn-and {
+    color: red;
+}
+
+.box-card img {
+    width: 68px;
+    height: 68px;
+}
+
+.candidate-details {
+    justify-content: center;
+}
+
+.lb-priority {
+    padding: 1px 5px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 999px;
+}
+
+.text-start .btn {
+    padding: 2px 5px;
+}
+
+.text-box {
+    white-space: nowrap;
+}

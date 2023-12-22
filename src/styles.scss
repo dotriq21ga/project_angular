@@ -1,0 +1,160 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$cloneTalent-primary: mat.define-palette(mat.$indigo-palette);
+$cloneTalent-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$cloneTalent-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$cloneTalent-theme: mat.define-light-theme((color: (primary: $cloneTalent-primary,
+        accent: $cloneTalent-accent,
+        warn: $cloneTalent-warn,
+      )));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($cloneTalent-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import '~primeicons/primeicons.css';
+
+body {
+  background-color: #e9ecef;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-form-field-flex {
+  max-height: 38px;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding: 7px 0;
+}
+
+mat-tree-node {
+  padding-left: 0 !important;
+}
+
+mat-tree-node:not(:first-child) {
+  padding-left: 0;
+}
+
+.login .p-button,
+.box-btn-form-dialog .p-button,
+.title-page .p-button {
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+
+.req .p-button {
+  padding: 12px;
+}
+
+.filter-row .p-dropdown,
+.filter-row .p-multiselect {
+  width: 19%;
+  border-radius: 3px;
+}
+
+.req .p-inputwrapper-filled .p-multiselect.p-multiselect-chip .p-multiselect-label {
+  padding: 2px 6px;
+}
+
+.req .p-multiselect-panel .p-multiselect-header {
+  padding: 6px 20px;
+}
+
+.req .p-multiselect.p-multiselect-chip .p-multiselect-token {
+  padding: 3px;
+  margin: 3px;
+}
+
+.req .p-inputtext,
+.filter-row .p-multiselect .p-multiselect-label {
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+
+.header-option {
+  width: 100%;
+}
+
+.req p-table {
+  width: 100%;
+}
+
+.form-dia-log .p-dropdown,
+.form-dia-log .p-calendar,
+.form-dia-log .p-multiselect,
+.form-dia-log input {
+  width: 100%;
+  border-radius: 3px;
+}
+
+.form-dia-log input {
+  padding: 12px;
+  border: 1px solid #ced4da;
+  outline: none;
+}
+
+.option-group .mat-mdc-button:not(:disabled) {
+  color: white;
+}
+
+.contro1 .p-chip {
+  background-color: #e6a6c7;
+}
+
+.contro2 .p-chip {
+  background-color: rgb(204, 8, 204);
+}
+
+.contro3 .p-chip {
+  background-color: rgb(245, 158, 11);
+}
+
+.p-chip .p-chip-text {
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
+.p-chip {
+  color: white;
+}
+
+.req {
+  margin-left: 250px;
+  padding: 16px 8px;
+}

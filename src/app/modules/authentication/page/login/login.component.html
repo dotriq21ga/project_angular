@@ -1,0 +1,44 @@
+<div class="login">
+    <div class="box-login">
+        <h1>Talent</h1>
+        <div class="card">
+            <form [formGroup]="formLogin" (ngSubmit)="login()">
+                <div class="card-header">
+                    <span>CurrentTenant: NotSelected ( <a href="">Change</a> )</span>
+                </div>
+                <div class="card-body px-4">
+                    <h1>LogIn</h1>
+                    <div class="input-box">
+                        <mat-form-field appearance="outline">
+                            <input formControlName="userNameOrEmailAddress" matInput placeholder="UserNameOrEmail">
+                            <mat-icon matSuffix><i class="fa-solid fa-user"></i></mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-box">
+                        <mat-form-field appearance="outline">
+                            <input type="password" formControlName="password" matInput placeholder="PassWord">
+                            <mat-icon matSuffix><i class="fa-solid fa-lock"></i></mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="box-row-login">
+                        <span>
+                            <input formControlName="rememberClient" class="form-check-input me-2" type="checkbox"
+                                value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                RememberMe
+                            </label>
+                        </span>
+
+                        <p-button type="submit" [disabled]="!this.formLogin.valid" styleClass="p-button-raised">
+                            <span>Login</span>
+                        </p-button>
+                    </div>
+                </div>
+            </form>
+            <div class="px-4">
+                <button class="mt-2 btn-login mb-5">Log In With Google</button>
+            </div>
+        </div>
+    </div>
+</div>

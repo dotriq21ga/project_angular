@@ -1,0 +1,49 @@
+<section>
+        <div class="sidebar-logo-group">
+                <div class="box-logo">
+                        <img src="http://dev-talent.nccsoft.vn/assets/img/Talent.png" alt="">
+                        <span>Talent</span>
+                </div>
+                <div class="box-icon">
+                        <mat-icon fontIcon="menu"></mat-icon>
+                </div>
+        </div>
+
+        <div class="sidebar-option-group">
+                <div class="user-group mt-3 pb-3 mb-3 ps-3">
+                        <img src="http://dev-talent.nccsoft.vn/assets/img/user.png" alt="">
+                        <span class="ps-2 ">{{user.name}} </span>
+                </div>
+
+                <div class="option-group">
+                        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                                        <button routerLink={{node.link}} mat-button matTreeNodeToggle>
+                                                <div>
+                                                        <span>
+                                                                <i [class]="node.icon"></i>
+                                                                {{node.name}}
+                                                        </span>
+                                                </div>
+                                        </button>
+                                </mat-tree-node>
+
+                                <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+                                        <button mat-button matTreeNodeToggle>
+                                                <div>
+                                                        <span>
+                                                                <span><i [class]="node.icon"></i></span>
+                                                                <span> {{node.name}}</span>
+                                                        </span>
+
+                                                        <mat-icon class="mat-icon-rtl-mirror">
+                                                                {{treeControl.isExpanded(node) ? 'expand_more' :
+                                                                'chevron_right'}}
+                                                        </mat-icon>
+                                                </div>
+                                        </button>
+                                </mat-tree-node>
+                        </mat-tree>
+                </div>
+        </div>
+</section>

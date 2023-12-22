@@ -1,0 +1,25 @@
+.title-page {
+    margin-left: 250px;
+    padding: 16px 8px;
+}
+
+.title-page li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.title-page ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.title-page {
+    display: flex;
+    justify-content: space-between;
+}
+
+.clone {
+    margin-right: 10px;
+}

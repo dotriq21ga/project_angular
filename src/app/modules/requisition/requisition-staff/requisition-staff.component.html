@@ -1,0 +1,207 @@
+<app-header [header]="menuIteam" [clone]="showLabelCloseAndClone" (onBtnClick)="showDiaLog(DIALOG_ACTION.CREATE)"></app-header>
+<section class="req">
+    <form>
+        <div class="filter-row">
+            <span class="item">
+                <label _ngcontent-reo-c152="" for="status" class="mr-2"> Status</label>
+                <p-dropdown inputid="status" [(ngModel)]="searchWithReqStatus" [filter]="true" filterBy="name"
+                    name="status" placeholder="All" [options]="status" optionValue="id" optionLabel="name"
+                    (onChange)="onGetDataChange()"></p-dropdown>
+            </span>
+            <span class="item">
+                <label _ngcontent-reo-c152="" for="branch" class="mr-2"> Branch</label>
+                <p-dropdown inputid="branch" placeholder="All" [(ngModel)]="searchWithBranch" optionValue="id"
+                    [filter]="true" filterBy="displayName" [options]="branch" optionLabel="displayName" name="branch"
+                    (onChange)="onGetDataChange()"></p-dropdown>
+            </span>
+            <span class="item">
+                <label _ngcontent-reo-c152="" for="position" class="mr-2"> Position</label>
+                <p-dropdown [(ngModel)]="searchWithSubPosition" inputId="position" [options]="position"
+                    placeholder="All" optionLabel="subPosition" optionValue="id" [filter]="true"
+                    styleClass="position-select" [group]="true" filterBy="subPosition" name="position"
+                    (onChange)="onGetDataChange()">
+                    <ng-template let-group pTemplate="group">
+                        <div class="p-d-flex p-ai-center">
+                            <i class="pi pi-folder-open"></i>
+                            <span class="ml-2">{{ group.position }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </span>
+            <span class="item">
+                <label _ngcontent-reo-c152="" for="skill" class="mr-2">
+                    <span>Skill</span>
+                    <button class="btn-or" (click)="onChangeisAndCondition()" *ngIf="!isAndCondition">(or)</button>
+                    <button class="btn-and" (click)="onChangeisAndCondition()" *ngIf="isAndCondition">(and)</button>
+                </label>
+
+                <p-multiSelect [(ngModel)]="skillFilter" (onChange)="onGetDataChange()" name="skill" inputId="skill"
+                    optionValue="id" [options]="skill" [panelStyle]="{'width':'300px'}" defaultLabel="All"
+                    optionLabel="name" display="chip">
+                </p-multiSelect>
+            </span>
+            <span class="item">
+                <label _ngcontent-reo-c152="" for="process" class="mr-2"> Process Status</label>
+                <p-dropdown inputid="process" placeholder="All" [options]="process" optionLabel="name"></p-dropdown>
+            </span>
+        </div>
+    </form>
+
+    <div class="box-card">
+        <div class="card">
+            <p-table sortField="lastModifiedTime" [lazy]="true" (onLazyLoad)="loadData($event)" [first]="first"
+                [paginator]="true" [rows]="rows" [loading]="loading" [showCurrentPageReport]="true"
+                [totalRecords]="totalCount" [tableStyle]="{ 'min-width': '50rem' }"
+                currentPageReportTemplate="Total : {totalRecords} " [rowsPerPageOptions]="option" [value]="iteamStaff"
+                dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" [sortOrder]="SORT_TYPE.DESC">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>No</th>
+                        <th pSortableColumn="priority">
+                            Requisition Info<p-sortIcon field="priority"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="lastModifiedTime">
+                            Update Time<p-sortIcon field="lastModifiedTime"></p-sortIcon>
+                        </th>
+                        <th sorted="true" pSortableColumn="timeNeed">
+                            <div class="d-flex">
+                                Time Need
+                                <p-sortIcon field="timeNeed"></p-sortIcon>
+                            </div>
+                        </th>
+                        <th>Status</th>
+                        <th pSortableColumn="quantity">
+                            <div class="d-flex">
+                                Quantity
+                                <p-sortIcon field="quantity"></p-sortIcon>
+                            </div>
+                            <div>{{totalQuantity}}</div>
+                        </th>
+                        <th>Candidate</th>
+                        <th>Note</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr *ngIf="!totalCount">
+                        <td colspan="9">No Record.</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-index="rowIndex" let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <div class="d-flex">
+                                <button (click)="getDataCv(product,index)" type="button" pButton pRipple
+                                    [pRowToggler]="product" class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                                </button>
+                                <span class="d-flex align-self-center">{{index+1}}</span>
+                            </div>
+                        </td>
+                        <td style="width: 250px;">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex ">
+                                    <span class="text-success fw-bold">#{{product.id}}</span>
+                                    <span class="text-danger fw-bold">{{product.branchName}}</span>
+                                    <span class="text-primary fw-bold text-box">{{product.subPositionName}}</span>
+                                    <span class="text-info fw-bold">{{product.levelInfo.defaultName}}</span>
+                                </div>
+
+                                <div>
+                                    <div class="text-light lb-priority" [ngClass]="colorItem(product.priorityName)">
+                                        {{product.priorityName}}</div>
+                                </div>
+                            </div>
+                            <div class="text-start">
+                                <div class="d-inline-block" *ngFor="let skill of product.skills">
+                                    <span class="btn bg-secondary m-1 text-light">{{skill.name}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div>{{product.updatedTime | date : 'shortDate' }}</div>
+                            <div *ngIf="product.creatorName">By {{product.creatorName}}</div>
+                        </td>
+                        <td>{{product.timeNeed | date : 'shortDate' }}</td>
+                        <td>
+                            <span class="bg-success text-light lb-priority">{{product.statusName}}</span>
+                        </td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.totalCandidateApply}}</td>
+                        <td>{{product.note}}</td>
+                        <td>
+                            <button pButton type="button" (click)="idCVs = product.id;menu.toggle($event)"
+                                icon="pi pi-bars"></button>
+                            <p-toast></p-toast>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-product>
+                    <tr>
+                        <td colspan="12">
+                            <div class="p-3">
+                                <p-table [value]="product.reqCvs" dataKey="id">
+                                    <ng-template pTemplate="header">
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Candidate Details</th>
+                        <th>Apply Time</th>
+                        <th>Interview</th>
+                        <th>Status</th>
+                        <th>F.Level</th>
+                        <th>HR Note</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-reqCvs>
+                    <tr>
+                        <td>{{ reqCvs.cvId }}</td>
+                        <td>
+                            <div class="candidate-details">
+                                <img src="http://dev-talent.nccsoft.vn/assets/img/user-circle.png" alt="">
+                                <span>
+                                    <div>{{ reqCvs.fullName}} {{ reqCvs.branchName }}</div>
+                                    <div>{{ reqCvs.phone }} {{ reqCvs.subPositionName }}</div>
+                                    <div>{{ reqCvs.email }}</div>
+                                </span>
+                                <span>
+                                    {{reqCvs.cvStatusName}}
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <div>{{ reqCvs.applyTime }}</div>
+                            <div>{{ reqCvs.lastModifiedName }}</div>
+                        </td>
+                        <td>
+                            <div *ngFor="let interview of reqCvs.interviews">{{ interview.interviewerName }}</div>
+                            <div>{{ reqCvs.interviewTime}}</div>
+                        </td>
+                        <td>{{ reqCvs.requestCVStatusName }}</td>
+                        <td>{{ reqCvs.finalLevelInfo?.defaultName}}</td>
+                        <td>{{ reqCvs.hrNote }}</td>
+                        <td>
+                            <p-button styleClass="p-button-danger"><i class="pi pi-trash"
+                                    style="font-size: 1rem"></i></p-button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">There are no order for this product yet.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        </td>
+        </tr>
+        </ng-template>
+        </p-table>
+    </div>
+    </div>
+</section>
+
+<p-menu #menu [model]="items" [popup]="true"></p-menu>
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>

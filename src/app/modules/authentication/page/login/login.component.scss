@@ -1,0 +1,75 @@
+.login {
+    display: flex;
+    justify-content: center;
+}
+
+.box-login {
+    width: 360px;
+}
+
+.login h1 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: 300;
+    color: #495057;
+}
+
+.card {
+    background-color: #fff;
+}
+
+.card-header {
+    font-weight: 300;
+    padding: 12px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    background-color: #fff;
+}
+
+.card h1 {
+    font-size: 24px;
+}
+
+
+
+.input-box .mat-mdc-form-field {
+    width: 100%;
+}
+
+.input-box input {
+    height: 38px;
+}
+
+i {
+    font-size: 16px;
+    color: #777;
+}
+
+mat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.check-box {
+    height: 16px;
+    width: 16px;
+    border-radius: 99;
+}
+
+.box-row-login {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-login {
+    width: 100%;
+}
+
+.button:not(:disabled),
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled) {
+    cursor: no-drop;
+}

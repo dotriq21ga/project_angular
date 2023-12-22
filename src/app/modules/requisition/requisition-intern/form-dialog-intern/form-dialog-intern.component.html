@@ -1,0 +1,75 @@
+<form action="" [formGroup]="form" (ngSubmit)="Save()">
+    <div class="form-dia-log">
+        <div class="row">
+            <span class="col">
+                <label for="userType">Type</label>
+                <p-dropdown formControlName="userType" [options]="userType" inputId="userType" optionLabel="name"
+                    optionValue="id"></p-dropdown>
+            </span>
+            <span class="col">
+                <label for="branch">Branch</label>
+                <p-dropdown [options]="branch" formControlName="branchId" placeholder="Select a branch" inputId="branch"
+                    optionLabel="name" optionValue="id"></p-dropdown>
+                <app-error-validation [showError]="isControlInvalid('branchId')" field="Branch"></app-error-validation>
+            </span>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="position">Position</label>
+                <p-dropdown inputId="position" formControlName="subPositionId" [options]="position" placeholder="All"
+                    optionLabel="subPosition" optionValue="id" [filter]="true" styleClass="position-select"
+                    [group]="true" filterBy="subPosition" name="position">
+                    <ng-template let-group pTemplate="group">
+                        <div class="p-d-flex p-ai-center">
+                            <i class="pi pi-folder-open"></i>
+                            <span class="ml-2">{{ group.position }}</span>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <app-error-validation [showError]="isControlInvalid('subPositionId')"
+                    field="Position"></app-error-validation>
+            </div>
+            <div class="col-6">
+                <label for="skill">Skills <a href="">(or)</a></label>
+                <p-multiSelect formControlName="skillIds" inputId="skill" optionValue="id" [options]="skill"
+                    defaultLabel="All" optionLabel="name" display="chip">
+                </p-multiSelect>
+                <app-error-validation [showError]="isControlInvalid('skillIds')" field="Skills"></app-error-validation>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="quantity">Quantity</label>
+                <input type="number" formControlName="quantity" min="1">
+            </div>
+            <div class="col">
+                <label for="priority">Priority</label>
+                <p-dropdown placeholder="Select priority" formControlName="priority" [options]="priority"
+                    inputId="priority" optionLabel="name" optionValue="id"></p-dropdown>
+                <app-error-validation [showError]="isControlInvalid('priority')"
+                    field="Priority"></app-error-validation>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <label for="timeNeed">Time Need</label>
+                <p-calendar formControlName="timeNeed" [showIcon]="true"></p-calendar>
+            </div>
+        </div>
+
+        <div>
+            <label for="note">Note</label>
+            <div class="card flex justify-content-center">
+                <textarea formControlName="note" rows="3" cols="40" pInputTextarea></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-end box-btn-form-dialog">
+        <p-button icon="pi pi-times" styleClass="p-button-secondary mx-2" label="Close"></p-button>
+        <p-button type="submit" icon="pi pi-check" label="Save"></p-button>
+    </div>
+</form>

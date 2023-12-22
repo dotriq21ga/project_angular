@@ -1,0 +1,31 @@
+<div class="title-page">
+    <ul>
+        <li>
+            <mat-icon fontIcon="home"></mat-icon>
+        </li>
+
+        <li *ngIf="header">
+            <mat-icon fontIcon="chevron_right"></mat-icon>
+        </li>
+
+        <li>
+            <a routerLink={{header?.link}}>{{header?.title}}</a>
+        </li>
+
+        <li *ngIf="header?.subTitle">
+            <mat-icon fontIcon="chevron_right"></mat-icon>
+        </li>
+
+        <li>
+            <span>{{header?.subTitle?.title}}</span>
+            <p-chip class="mx-1 contro1" label="{{header?.subTitle?.name}}"></p-chip>
+            <p-chip class="mx-1 contro2" label="{{header?.subTitle?.branch}}"></p-chip>
+            <p-chip class="mx-1 contro3" label="{{header?.subTitle?.status}}"></p-chip>
+        </li>
+    </ul>
+
+    <div>
+        <p-button *ngIf="clone" class="clone" styleClass="p-button-warning" label="Clone & Clone All"></p-button>
+        <p-button icon="pi pi-plus" (click)="show()" label="Create"></p-button>
+    </div>
+</div>
